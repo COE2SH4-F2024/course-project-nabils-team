@@ -7,6 +7,7 @@
 
 class Player
 {
+    
     // Construct the remaining declaration from the project manual.
 
     // Only some sample members are included here

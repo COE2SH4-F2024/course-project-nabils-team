@@ -20,6 +20,49 @@ objPos::objPos(int xPos, int yPos, char sym)
 // [TODO] Implement the missing special member functions to meet the minimum four rule
 
 
+objPos::~objPos() {
+    delete pos;
+}
+
+objPos::objPos(const objPos& other)
+{
+    if (other.pos)
+    {
+        pos = new Pos{*other.pos}; 
+    }
+    else
+    {
+        pos = nullptr;
+    }
+    symbol = other.symbol;
+}
+
+objPos& objPos::operator=(const objPos& other)
+{
+    if (this == &other)
+        return *this; // Handle self-assignment
+
+    // Clean up existing resources
+    delete pos;
+
+    // Perform deep copy
+    if (other.pos)
+    {
+        pos = new Pos{*other.pos};
+    }
+    else
+    {
+        pos = nullptr;
+    }
+    symbol = other.symbol;
+
+    return *this;
+}
+
+
+
+
+
 
 
 void objPos::setObjPos(objPos o)

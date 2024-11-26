@@ -41,6 +41,9 @@ void Initialize(void)
     MacUILib_clearScreen();
 
     exitFlag = false;
+
+
+
 }
 
 void GetInput(void)
@@ -56,6 +59,31 @@ void RunLogic(void)
 void DrawScreen(void)
 {
     MacUILib_clearScreen();    
+
+    for (int row = 0; row < 10; row++) {
+
+        for (int col = 0; col < 20; col++) {
+
+            if (row == 0 || row == 10 - 1 || col == 0 || col == 20 - 1) {
+
+                MacUILib_printf("#");
+
+            // } else if (row == playerPos.y && col == playerPos.x) {
+                
+            //     MacUILib_printf("%c", playerPosition.symbol);
+
+            } else {
+
+                MacUILib_printf(" ");
+
+            }
+            
+
+        }
+        MacUILib_printf("\n");
+
+
+    }
 }
 
 void LoopDelay(void)
