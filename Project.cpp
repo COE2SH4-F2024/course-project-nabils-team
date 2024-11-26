@@ -47,7 +47,8 @@ void Initialize(void)
     MacUILib_clearScreen();
 
     exitFlag = false;
-
+     
+    gameMechsPtr = new GameMechs();
 
     extern GameMechs* gameMechsPtr; 
 
@@ -58,7 +59,7 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   
+   gameMechsPtr->setInput(gameMechsPtr->getInput());
 }
 
 void RunLogic(void)
@@ -72,11 +73,11 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();    
 
-    for (int row = 0; row < 10; row++) {
+    for (int row = 0; row < gameMechsPtr->getBoardSizeY(); row++) {
 
-        for (int col = 0; col < 20; col++) {
+        for (int col = 0; col < gameMechsPtr->getBoardSizeX(); col++) {
 
-            if (row == 0 || row == 10 - 1 || col == 0 || col == 20 - 1) {
+            if (row == 0 || row == gameMechsPtr->getBoardSizeY() - 1 || col == 0 || col == gameMechsPtr->getBoardSizeX() - 1) {
 
                 MacUILib_printf("#");
 
