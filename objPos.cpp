@@ -40,12 +40,8 @@ objPos::objPos(const objPos& other)
 objPos& objPos::operator=(const objPos& other)
 {
     if (this == &other)
-        return *this; // Handle self-assignment
-
-    // Clean up existing resources
+        return *this; 
     delete pos;
-
-    // Perform deep copy
     if (other.pos)
     {
         pos = new Pos{*other.pos};
