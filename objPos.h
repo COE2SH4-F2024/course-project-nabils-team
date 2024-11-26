@@ -16,6 +16,8 @@ class objPos
 
         objPos();
         objPos(int xPos, int yPos, char sym);
+
+        // This is Omar's Edit
         
         // Respect the rule of six / minimum four
         // [TODO] Implement the missing special member functions to meet the minimum four rule
