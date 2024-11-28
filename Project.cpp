@@ -28,7 +28,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(gameMechsPtr->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -59,7 +59,8 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   gameMechsPtr->setInput(gameMechsPtr->getInput());
+    
+    gameMechsPtr->setInput(gameMechsPtr->getInput());
 }
 
 void RunLogic(void)

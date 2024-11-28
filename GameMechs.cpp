@@ -74,7 +74,12 @@ void GameMechs::setLoseFlag()
 
 void GameMechs::setInput(char this_input)
 {
-    input = MacUILib_getChar();
+    if (MacUILib_hasChar())
+    {
+        input = MacUILib_getChar();
+    }
+    
+    
 }
 
 void GameMechs::clearInput()

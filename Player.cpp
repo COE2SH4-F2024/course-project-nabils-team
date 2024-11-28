@@ -37,31 +37,9 @@ void Player::updatePlayerDir()
     {
         switch(input)
         {                      
-            // case ' ':  // exit
-            //     mainGameMechsRef->getExitFlagStatus() = 1;
-            //     break;
-            
-            // case '1':
-            //     gameSpeed = 250000;
-            //     speedLevel = 1;
-            //     break;
-            // case '2':
-            //     gameSpeed = 200000;
-            //     speedLevel = 2;
-            //     break;
-            // case '3':
-            //     gameSpeed = 150000;
-            //     speedLevel = 3;
-            //     break;
-            // case '4':
-            //     gameSpeed = 100000;
-            //     speedLevel = 4;
-            //     break;
-            // case '5':
-            //     gameSpeed = 50000;
-            //     speedLevel = 5;
-            //     break;
-            
+            case ' ':  // exit
+                mainGameMechsRef->setExitTrue();
+                break;
             case 'W':
             case 'w':
                 if (myDir == LEFT || myDir == RIGHT)
@@ -111,7 +89,6 @@ void Player::movePlayer()
     switch (myDir)
     {
     case UP:
-        
         newY -= 1;
         break;
     case DOWN:
@@ -130,10 +107,10 @@ void Player::movePlayer()
         break;
     }    
         
-    if (newX < 1) newX = 20 - 2;     
-    else if (newX > 20 - 2) newX = 1;    
-    else if (newY < 1) newY = 10 - 2;    
-    else if (newY > 10 - 2) newY = 1;
+    if (newX < 1) newX = mainGameMechsRef->getBoardSizeX() - 2;     
+    else if (newX > mainGameMechsRef->getBoardSizeX() - 2) newX = 1;    
+    else if (newY < 1) newY = mainGameMechsRef->getBoardSizeY() - 2;    
+    else if (newY > mainGameMechsRef->getBoardSizeY() - 2) newY = 1;
 
     playerPos = objPos(newX, newY, '*'); 
 
