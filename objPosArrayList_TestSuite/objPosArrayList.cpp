@@ -22,7 +22,7 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if (listSize == arrayCapacity) // check is list is not full already
+    if (listSize >= arrayCapacity) // check is list is not full already
     {
         return;
     }   
@@ -39,16 +39,22 @@ void objPosArrayList::insertHead(objPos thisPos)
 
 void objPosArrayList::insertTail(objPos thisPos)
 {
-    if (listSize == arrayCapacity) // check is list is not full already
+    if (listSize >= arrayCapacity) // check is list is not full already
     {
         return;
     }
 
-    aList[++listSize-1] = thisPos;  
+    aList[listSize++] = thisPos;  
 }
 
 void objPosArrayList::removeHead()
 {
+    if (listSize <= 0)
+    {
+        return;
+    }
+    
+
     for (int i = 0; i < listSize; i++)
     {
         aList[i] = aList[i+1];
@@ -59,7 +65,15 @@ void objPosArrayList::removeHead()
 
 void objPosArrayList::removeTail()
 {
-    listSize--;
+    if (listSize > 0)
+    {
+        listSize--;
+    }
+
+    else 
+    {
+        return;
+    }
 }
 
 objPos objPosArrayList::getHeadElement() const
@@ -74,5 +88,17 @@ objPos objPosArrayList::getTailElement() const
 
 objPos objPosArrayList::getElement(int index) const
 {
+    if(index >= arrayCapacity)
+    {
+        return aList[listSize-1];
+    }
+
+    else if(index < 0)
+    {
+        return aList[0];
+    }
+    else
+    {
     return aList[index];
+    }
 }
