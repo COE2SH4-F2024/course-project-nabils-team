@@ -37,6 +37,8 @@ void objPosArrayList::insertHead(objPos thisPos)
     aList[0] = thisPos;
 }
 
+
+
 void objPosArrayList::insertTail(objPos thisPos)
 {
     if (listSize >= arrayCapacity) // check is list is not full already
@@ -44,7 +46,8 @@ void objPosArrayList::insertTail(objPos thisPos)
         return;
     }
 
-    aList[listSize++] = thisPos;  
+    listSize++;
+    aList[listSize] = thisPos;  
 }
 
 void objPosArrayList::removeHead()

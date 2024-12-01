@@ -74,6 +74,8 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();    
 
+    
+
     for (int row = 0; row < gameMechsPtr->getBoardSizeY(); row++) {
 
         for (int col = 0; col < gameMechsPtr->getBoardSizeX(); col++) {
@@ -82,14 +84,25 @@ void DrawScreen(void)
 
                 MacUILib_printf("#");
 
-            } else if (row == playerPtr->getPlayerPos().getY() && col == playerPtr->getPlayerPos().getX()) {
-                
-                 MacUILib_printf("%c", playerPtr->getPlayerPos().getSymbol());
+            } 
+            else 
+            {
 
-            } else {
+                bool snakebodypart = false; 
+                for (int i =0; i<playerPtr->getPlayerPos()->getSize(); i++) 
+                {
+                    if (row == playerPtr->getPlayerPos()->getElement(i).getY() && col == playerPtr->getPlayerPos()->getElement(i).getX())
+                    {
+                    MacUILib_printf("%c", playerPtr->getPlayerPos()->getHeadElement().getSymbol());
+                    snakebodypart = true;
+                    break;
+                    }
+                }
+                if(snakebodypart == false)
+                {
+                    MacUILib_printf(" ");
 
-                MacUILib_printf(" ");
-
+                }
             }
             
 

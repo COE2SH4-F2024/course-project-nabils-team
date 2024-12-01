@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "objPosArrayList.h"
 
 
 Player::Player(GameMechs* thisGMRef)
@@ -8,8 +9,9 @@ Player::Player(GameMechs* thisGMRef)
 
     // more actions to be included
 
-    playerPos.setObjPos(8, 6, '*');
-
+    playerPosList = new objPosArrayList[20];
+    objPos start =  {7, 15, '*'};
+    playerPosList->insertHead(start);
 
 }
 
@@ -17,14 +19,14 @@ Player::Player(GameMechs* thisGMRef)
 Player::~Player()
 {
     // delete any heap members here
-
+    delete[] playerPosList;
 
 }
 
-objPos Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
-    return playerPos;
+    return playerPosList;
 
 }
 
@@ -83,8 +85,8 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-    int newX = playerPos.getX();
-    int newY = playerPos.getY();
+    int newX = playerPosList->getHeadElement().getX();
+    int newY = playerPosList->getHeadElement().getY();
 
     switch (myDir)
     {
@@ -112,7 +114,9 @@ void Player::movePlayer()
     else if (newY < 1) newY = mainGameMechsRef->getBoardSizeY() - 2;    
     else if (newY > mainGameMechsRef->getBoardSizeY() - 2) newY = 1;
 
-    playerPos = objPos(newX, newY, '*'); 
+    objPos newPos = objPos(newX, newY, '*'); 
+    playerPosList->insertHead(newPos);
+    playerPosList->removeTail();
 
 }
 
