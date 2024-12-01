@@ -2,15 +2,21 @@
 #include "Food.h"
 #include <cstdlib> 
 #include <ctime>   
+#include "Player.h"
+#include "objPos.h"
+#include "objPosArrayList.h"
+#include "GameMechs.h"
 
-Food::Food(GameMechs* thisGMRef)
-    : gameMechsRef(thisGMRef), foodPos(0, 0, 'O') { // Initialize food position with a default value
-    srand(static_cast<unsigned>(time(0))); // Seed the random number generator
-    generateFood(objPos(0, 0, '*'));       // Generate the first food item
+
+
+Food::Food(GameMechs* thisGMRef):gameMechsRef(thisGMRef) 
+{
+    srand(static_cast<unsigned>(time(0))); 
+    generateFood(objPos(0, 0, '*'));       
 }
 
 Food::~Food() {
-    // Nothing to clean up as no dynamic memory is allocated
+
 }
 
 void Food::generateFood(objPos playerPos) {
@@ -19,11 +25,14 @@ void Food::generateFood(objPos playerPos) {
 
     int newX, newY;
     do {
-        newX = rand() % boardX; // Random x-coordinate
-        newY = rand() % boardY; // Random y-coordinate
-    } while (newX == playerPos.getX() && newY == playerPos.getY()); // Avoid player's position
+        newX = rand() % boardX; 
+        newY = rand() % boardY; 
+    } while (newX == playerPos.getX()  && newY == playerPos.getY());
 
-    foodPos = objPos(newX, newY, 'O'); // Set new food position
+    gameMechsRef->newFood = false;
+
+
+    foodPos = objPos(newX, newY, 'O'); 
 }
 
 objPos Food::getFoodPos() const {

@@ -41,6 +41,8 @@ class GameMechs
         
         int getScore() const;
         void incrementScore();
+        bool newFood = true;
+
         
         // More methods should be added here
 };

@@ -74,8 +74,11 @@ void RunLogic(void)
     playerPtr->updatePlayerDir();
 
     playerPtr->movePlayer();
-
-    foodPtr->generateFood(playerPtr->getPlayerPos()->getHeadElement());
+    if (gameMechsPtr->newFood == true)
+    {
+        foodPtr->generateFood(playerPtr->getPlayerPos()->getHeadElement());
+    }
+    
 }
 
 void DrawScreen(void)
@@ -93,10 +96,15 @@ void DrawScreen(void)
 
                 MacUILib_printf("#");
 
-            } 
+            }
+
+            else if (row == foodPtr->getFoodPos().getY() && col == foodPtr->getFoodPos().getX())
+            {
+                MacUILib_printf("%c", foodPtr->getFoodPos().getSymbol());
+            }
+
             else 
             {
-
                 bool snakebodypart = false; 
                 for (int i =0; i<playerPtr->getPlayerPos()->getSize(); i++) 
                 {
@@ -110,28 +118,18 @@ void DrawScreen(void)
                 if(snakebodypart == false)
                 {
                     MacUILib_printf(" ");
-            else if (row == playerPtr->getPlayerPos().getY() && col == playerPtr->getPlayerPos().getX()) {
-                
-                MacUILib_printf("%c", playerPtr->getPlayerPos().getSymbol());
             }
-            else if (row == foodPtr->getFoodPos().getY() && col == foodPtr->getFoodPos().getX())
-            {
-                MacUILib_printf("%c", foodPtr->getFoodPos().getSymbol());
-            }
-            else {
-
-                MacUILib_printf(" ");
-
-                }
+        
             }
             
-
-        }
+            }
+        
         MacUILib_printf("\n");
 
 
     }
 }
+
 
 void LoopDelay(void)
 {
