@@ -88,4 +88,19 @@ void GameMechs::clearInput()
 
 }
 
+
+bool GameMechs::getNewFood()
+{
+    return newFood;
+}
+
+void GameMechs::setNewFoodTrue()
+{
+    newFood = true;
+}
+void GameMechs::setNewFoodFalse()
+{
+    newFood = false;
+}
+
 // More methods should be added here

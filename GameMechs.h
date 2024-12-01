@@ -20,6 +20,9 @@ class GameMechs
 
         int boardSizeX;
         int boardSizeY;
+        bool newFood = true;
+
+        
 
 
     public:
@@ -41,7 +44,9 @@ class GameMechs
         
         int getScore() const;
         void incrementScore();
-        bool newFood = true;
+        bool getNewFood();
+        void setNewFoodTrue();
+        void setNewFoodFalse();
 
         
         // More methods should be added here

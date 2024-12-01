@@ -12,25 +12,39 @@
 Food::Food(GameMechs* thisGMRef):gameMechsRef(thisGMRef) 
 {
     srand(static_cast<unsigned>(time(0))); 
-    generateFood(objPos(0, 0, '*'));       
+    foodPos = objPos(0, 0, 'O'); 
 }
 
 Food::~Food() {
 
 }
 
-void Food::generateFood(objPos playerPos) {
-    int boardX = gameMechsRef->getBoardSizeX();
-    int boardY = gameMechsRef->getBoardSizeY();
+void Food::generateFood(objPosArrayList* playerPosList) {
+    int boardX = gameMechsRef->getBoardSizeX()-2;
+    int boardY = gameMechsRef->getBoardSizeY()-2;
+
+    bool isOnSnake;
 
     int newX, newY;
     do {
-        newX = rand() % boardX; 
-        newY = rand() % boardY; 
-    } while (newX == playerPos.getX()  && newY == playerPos.getY());
+        newX = (rand() % boardX) + 1; 
+        newY = (rand() % boardY) + 1; 
 
-    gameMechsRef->newFood = false;
 
+        isOnSnake = false;
+        for (int i = 0; i < playerPosList->getSize(); i++) {
+            if (newX == playerPosList->getElement(i).getX() && newY == playerPosList->getElement(i).getY()) 
+            {
+                isOnSnake = true;
+                break; 
+            } 
+        }
+    }
+    while (isOnSnake);
+    
+    
+
+    gameMechsRef->setNewFoodFalse();
 
     foodPos = objPos(newX, newY, 'O'); 
 }

@@ -1,12 +1,15 @@
 #include "Player.h"
 #include "objPosArrayList.h"
+#include "Food.h"
+#include "GameMechs.h"
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* foodref)
 {
     mainGameMechsRef = thisGMRef;
     myDir = LEFT;
-
+    mainFoodRef = foodref;
+    
     // more actions to be included
 
     playerPosList = new objPosArrayList[20];
@@ -27,6 +30,8 @@ objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
     return playerPosList;
+
+
 
 }
 
@@ -115,9 +120,42 @@ void Player::movePlayer()
     else if (newY > mainGameMechsRef->getBoardSizeY() - 2) newY = 1;
 
     objPos newPos = objPos(newX, newY, '*'); 
-    playerPosList->insertHead(newPos);
-    playerPosList->removeTail();
 
+    
+
+
+
+
+    if (newX == mainFoodRef->getFoodPos().getX() && newY == mainFoodRef->getFoodPos().getY())
+    {
+        objPos newHead = objPos(mainFoodRef->getFoodPos().getX(), mainFoodRef->getFoodPos().getY(), '*');
+        playerPosList->insertHead(newHead);
+        mainGameMechsRef->setNewFoodTrue();
+        mainGameMechsRef->incrementScore();
+
+    }
+    else{
+        playerPosList->insertHead(newPos);
+        playerPosList->removeTail();
+    }
+    
+
+}
+
+bool Player::checkSelfCollision()
+{
+    
+    for (int i = 1; i < playerPosList->getSize(); i++)
+    {
+        
+        if (playerPosList->getHeadElement().getX() == playerPosList->getElement(i).getX() && playerPosList->getHeadElement().getY() == playerPosList->getElement(i).getY() )
+        {
+            return true;
+        }
+        
+    }
+    return false;
+    
 }
 
 // More methods to be added

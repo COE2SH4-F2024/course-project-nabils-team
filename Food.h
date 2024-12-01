@@ -1,10 +1,8 @@
 #ifndef FOOD_H
 #define FOOD_H
 
-
 #include <cstdlib>
 #include <time.h>
-
 #include "objPos.h"
 #include "objPosArrayList.h"
 #include "GameMechs.h"
@@ -16,11 +14,12 @@ class Food{
         objPos foodPos;          
         GameMechs* gameMechsRef; 
 
+
     public:
         Food(GameMechs* thisGMRef); 
         ~Food();                    
-        void generateFood(objPos playerPos); 
-        objPos getFoodPos() const;  
+        void generateFood(objPosArrayList* playerPosList); 
+        objPos getFoodPos() const;
 
 
 };

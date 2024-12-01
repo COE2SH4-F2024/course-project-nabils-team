@@ -7,11 +7,11 @@
 
 
 
+
 using namespace std;
 
 #define DELAY_CONST 100000
 
-bool exitFlag;
 
 void Initialize(void);
 void GetInput(void);
@@ -49,15 +49,16 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    exitFlag = false;
      
     gameMechsPtr = new GameMechs();
 
     extern GameMechs* gameMechsPtr; 
 
-    playerPtr = new Player(gameMechsPtr);
-
     foodPtr = new Food(gameMechsPtr); 
+
+
+    playerPtr = new Player(gameMechsPtr, foodPtr);
+
 
 
 
@@ -71,12 +72,25 @@ void GetInput(void)
 
 void RunLogic(void)
 {
+
+    
+    
+    
+
     playerPtr->updatePlayerDir();
 
     playerPtr->movePlayer();
-    if (gameMechsPtr->newFood == true)
+
+    if (playerPtr->checkSelfCollision())
     {
-        foodPtr->generateFood(playerPtr->getPlayerPos()->getHeadElement());
+        gameMechsPtr->setLoseFlag();
+        gameMechsPtr->setExitTrue();
+    }
+
+    if (gameMechsPtr->getNewFood() == true)
+    {
+        foodPtr->generateFood(playerPtr->getPlayerPos());
+
     }
     
 }
@@ -110,9 +124,9 @@ void DrawScreen(void)
                 {
                     if (row == playerPtr->getPlayerPos()->getElement(i).getY() && col == playerPtr->getPlayerPos()->getElement(i).getX())
                     {
-                    MacUILib_printf("%c", playerPtr->getPlayerPos()->getHeadElement().getSymbol());
-                    snakebodypart = true;
-                    break;
+                        MacUILib_printf("%c", playerPtr->getPlayerPos()->getHeadElement().getSymbol());
+                        snakebodypart = true;
+                        break;
                     }
                 }
                 if(snakebodypart == false)
@@ -128,6 +142,12 @@ void DrawScreen(void)
 
 
     }
+    MacUILib_printf("Score: %d\n", gameMechsPtr->getScore());
+    if (gameMechsPtr->getExitFlagStatus() && gameMechsPtr->getLoseFlagStatus())
+    {
+        MacUILib_printf("GAME OVER! DON'T PLAY AGAIN!");
+    }
+    
 }
 
 
@@ -147,7 +167,6 @@ void CleanUp(void)
     delete foodPtr;
     foodPtr = nullptr;
 
-    MacUILib_clearScreen();    
 
     MacUILib_uninit();
 
