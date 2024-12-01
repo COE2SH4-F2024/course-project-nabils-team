@@ -3,6 +3,8 @@
 #include "objPos.h"
 #include "Player.h"
 #include "GameMechs.h"
+#include "Food.h"
+
 
 
 using namespace std;
@@ -20,6 +22,7 @@ void CleanUp(void);
 
 Player* playerPtr = nullptr; 
 GameMechs* gameMechsPtr = nullptr; 
+Food* foodPtr = nullptr; 
 
 
 
@@ -53,7 +56,10 @@ void Initialize(void)
     extern GameMechs* gameMechsPtr; 
 
     playerPtr = new Player(gameMechsPtr);
-    
+
+    foodPtr = new Food(gameMechsPtr); 
+
+
 
 }
 
@@ -68,11 +74,14 @@ void RunLogic(void)
 
     playerPtr->updatePlayerDir();
     playerPtr->movePlayer();
+
+    foodPtr->generateFood(playerPtr->getPlayerPos());
 }
 
 void DrawScreen(void)
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();   
+ 
 
     
 
@@ -85,6 +94,7 @@ void DrawScreen(void)
                 MacUILib_printf("#");
 
             } 
+<<<<<<< HEAD
             else 
             {
 
@@ -101,6 +111,19 @@ void DrawScreen(void)
                 if(snakebodypart == false)
                 {
                     MacUILib_printf(" ");
+=======
+            else if (row == playerPtr->getPlayerPos().getY() && col == playerPtr->getPlayerPos().getX()) {
+                
+                MacUILib_printf("%c", playerPtr->getPlayerPos().getSymbol());
+            }
+            else if (row == foodPtr->getFoodPos().getY() && col == foodPtr->getFoodPos().getX())
+            {
+                MacUILib_printf("%c", foodPtr->getFoodPos().getSymbol());
+            }
+            else {
+
+                MacUILib_printf(" ");
+>>>>>>> d39849a915b81c9f4c6f046b82f0bd9d92a6713d
 
                 }
             }
@@ -126,6 +149,8 @@ void CleanUp(void)
     playerPtr = nullptr;
     delete gameMechsPtr;
     gameMechsPtr = nullptr;
+    delete foodPtr;
+    foodPtr = nullptr;
 
     MacUILib_clearScreen();    
 
