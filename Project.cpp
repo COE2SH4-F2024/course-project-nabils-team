@@ -71,11 +71,11 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-
     playerPtr->updatePlayerDir();
+
     playerPtr->movePlayer();
 
-    foodPtr->generateFood(playerPtr->getPlayerPos());
+    foodPtr->generateFood(playerPtr->getPlayerPos()->getHeadElement());
 }
 
 void DrawScreen(void)
@@ -94,7 +94,6 @@ void DrawScreen(void)
                 MacUILib_printf("#");
 
             } 
-<<<<<<< HEAD
             else 
             {
 
@@ -111,7 +110,6 @@ void DrawScreen(void)
                 if(snakebodypart == false)
                 {
                     MacUILib_printf(" ");
-=======
             else if (row == playerPtr->getPlayerPos().getY() && col == playerPtr->getPlayerPos().getX()) {
                 
                 MacUILib_printf("%c", playerPtr->getPlayerPos().getSymbol());
@@ -123,7 +121,6 @@ void DrawScreen(void)
             else {
 
                 MacUILib_printf(" ");
->>>>>>> d39849a915b81c9f4c6f046b82f0bd9d92a6713d
 
                 }
             }
