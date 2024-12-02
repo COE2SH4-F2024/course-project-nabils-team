@@ -9,10 +9,6 @@ objPosArrayList::objPosArrayList()
     listSize = 0;
     arrayCapacity = 200;
     aList = new objPos[arrayCapacity];
-    insertHead(objPos());
-    insertTail(objPos(2, 2, '1'));
-    insertTail(objPos(2, 3, '2'));    
-    
 }
 
 objPosArrayList::~objPosArrayList()

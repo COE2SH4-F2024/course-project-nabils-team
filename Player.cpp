@@ -13,7 +13,7 @@ Player::Player(GameMechs* thisGMRef, Food* foodref)
     // more actions to be included
 
     playerPosList = new objPosArrayList[20];
-    objPos start =  {7, 15, '*'};
+    objPos start =  {7, 15, 'o'};
     playerPosList->insertHead(start);
 
 }
@@ -119,7 +119,7 @@ void Player::movePlayer()
     else if (newY < 1) newY = mainGameMechsRef->getBoardSizeY() - 2;    
     else if (newY > mainGameMechsRef->getBoardSizeY() - 2) newY = 1;
 
-    objPos newPos = objPos(newX, newY, '*'); 
+    objPos newPos = objPos(newX, newY, 'o'); 
 
     
 
@@ -128,7 +128,7 @@ void Player::movePlayer()
 
     if (newX == mainFoodRef->getFoodPos().getX() && newY == mainFoodRef->getFoodPos().getY())
     {
-        objPos newHead = objPos(mainFoodRef->getFoodPos().getX(), mainFoodRef->getFoodPos().getY(), '*');
+        objPos newHead = objPos(mainFoodRef->getFoodPos().getX(), mainFoodRef->getFoodPos().getY(), 'o');
         playerPosList->insertHead(newHead);
         mainGameMechsRef->setNewFoodTrue();
         mainGameMechsRef->incrementScore();

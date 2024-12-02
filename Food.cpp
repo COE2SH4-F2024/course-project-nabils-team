@@ -12,7 +12,7 @@
 Food::Food(GameMechs* thisGMRef):gameMechsRef(thisGMRef) 
 {
     srand(static_cast<unsigned>(time(0))); 
-    foodPos = objPos(0, 0, 'O'); 
+    foodPos = objPos(0, 0, 'x'); 
 }
 
 Food::~Food() {
@@ -46,7 +46,7 @@ void Food::generateFood(objPosArrayList* playerPosList) {
 
     gameMechsRef->setNewFoodFalse();
 
-    foodPos = objPos(newX, newY, 'O'); 
+    foodPos = objPos(newX, newY, 'x'); 
 }
 
 objPos Food::getFoodPos() const {
