@@ -1,7 +1,7 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
 
-GameMechs::GameMechs()
+GameMechs::GameMechs() // constructor that sets the game board to 30x15 with 0 score, no input, and exitflag and loseflag equal to false. 
 {
     boardSizeX = 30; 
     boardSizeY = 15;
@@ -13,66 +13,62 @@ GameMechs::GameMechs()
 
 }
 
-GameMechs::GameMechs(int boardX, int boardY)
+GameMechs::GameMechs(int boardX, int boardY) // setting game board size
 {
     boardSizeX = boardX;
     boardSizeY = boardY; 
 }
 
-// do you need a destructor?
-GameMechs::~GameMechs()
-{
-    
-}
 
-bool GameMechs::getExitFlagStatus() const
+
+bool GameMechs::getExitFlagStatus() const // simple
 {
     return exitFlag;
 }
 
-bool GameMechs::getLoseFlagStatus() const
+bool GameMechs::getLoseFlagStatus() const // simple
 {
     return loseFlag; 
 }
     
 
-char GameMechs::getInput() const
+char GameMechs::getInput() const // simple 
 {
     return input;
 }
 
-int GameMechs::getScore() const
+int GameMechs::getScore() const // simple
 {
     return score;
 }
 
-void GameMechs::incrementScore()
+void GameMechs::incrementScore() // simple
 {
     score++;
 }
 
-int GameMechs::getBoardSizeX() const
+int GameMechs::getBoardSizeX() const // simple
 {
     return boardSizeX;
 }
 
-int GameMechs::getBoardSizeY() const
+int GameMechs::getBoardSizeY() const // simple
 {
     return boardSizeY;
 }
 
 
-void GameMechs::setExitTrue()
+void GameMechs::setExitTrue() // simple
 {
     exitFlag = true; 
 }
 
-void GameMechs::setLoseFlag()
+void GameMechs::setLoseFlag() // simple
 {
     loseFlag = true;
 }
 
-void GameMechs::setInput(char this_input)
+void GameMechs::setInput(char this_input) // set a input
 {
     if (MacUILib_hasChar())
     {
@@ -82,7 +78,7 @@ void GameMechs::setInput(char this_input)
     
 }
 
-void GameMechs::clearInput()
+void GameMechs::clearInput() // simple.
 {
     input = '\0'; 
 
@@ -94,11 +90,11 @@ bool GameMechs::getNewFood()
     return newFood;
 }
 
-void GameMechs::setNewFoodTrue()
+void GameMechs::setNewFoodTrue() // function to set bool when needed to spawn new food. 
 {
     newFood = true;
 }
-void GameMechs::setNewFoodFalse()
+void GameMechs::setNewFoodFalse() // function to set bool when not needed to spawn new food. 
 {
     newFood = false;
 }
