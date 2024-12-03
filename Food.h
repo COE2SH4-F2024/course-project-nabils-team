@@ -11,15 +11,15 @@
 
 class Food{
     private:
-        objPos foodPos;          
-        GameMechs* gameMechsRef; 
+        objPos foodPos; //ObjPos of food         
+        GameMechs* gameMechsRef; //pointer reference to gamemechs class
 
 
     public:
-        Food(GameMechs* thisGMRef); 
-        ~Food();                    
-        void generateFood(objPosArrayList* playerPosList); 
-        objPos getFoodPos() const;
+        Food(GameMechs* thisGMRef); //Constructor
+        ~Food(); // decontructor                    
+        void generateFood(objPosArrayList* playerPosList); //function generating food @ random location.
+        objPos getFoodPos() const; // Getter function return objpos of food. 
 
 
 };

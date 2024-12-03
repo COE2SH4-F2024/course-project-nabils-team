@@ -17,12 +17,12 @@ class Player
 
     
     public:
-        enum Dir {UP, DOWN, LEFT, RIGHT, STOP};  // This is the direction state
+        enum Dir {UP, DOWN, LEFT, RIGHT, STOP};  // direction states
 
-        Player(GameMechs* thisGMRef, Food* foodref);
-        ~Player();
+        Player(GameMechs* thisGMRef, Food* foodref); // constructor with reference to gamemechs class and food class
+        ~Player(); // deconstructor
 
-        objPosArrayList* getPlayerPos() const; // Upgrade this in iteration 3.       
+        objPosArrayList* getPlayerPos() const; // Getter returning Array list of snakes position      
         void updatePlayerDir();
         void movePlayer();
         bool checkSelfCollision();
@@ -30,11 +30,11 @@ class Player
         // More methods to be added here
 
     private:
-        objPosArrayList *playerPosList; // Upgrade this in iteration 3.       
+        objPosArrayList *playerPosList; // Reference to Snake Body (List )       
         enum Dir myDir;
 
-        // Need a reference to the Main Game Mechanisms
-        GameMechs* mainGameMechsRef;
+        
+        GameMechs* mainGameMechsRef; // Need a reference to the Main Game Mechanisms
         Food* mainFoodRef;
 
 };
